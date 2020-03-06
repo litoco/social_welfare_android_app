@@ -3,7 +3,6 @@ package com.example.sic;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,7 +48,7 @@ public class FireBaseHelperClass {
         this.postFragment=postFragment;
         final NotificationClass notificationClass = new NotificationClass();
         String storagePath = "users_file/";
-        storagePath+="test_user_id/";
+        storagePath+=firebaseUser.getEmail();
         final ArrayList<Uri> fileUri=new ArrayList<>();
         final int maxCount=fileNameArrayList.size();
         final int[] currCount = {0};
@@ -111,7 +110,7 @@ public class FireBaseHelperClass {
     }
 
     public void addPostToFireBase(ArrayList<Uri> uploadedFileUri, FirebaseUser firebaseUser, final Context context){
-        final String userId = "test_user_id";
+        final String userId = firebaseUser.getEmail();
         String postNum="post";
         SharedPreferences sp = context.getSharedPreferences("SiC", Context.MODE_PRIVATE);
         int postNumber = sp.getInt("postNumber",0);
@@ -164,7 +163,7 @@ public class FireBaseHelperClass {
     }
 
     public void getPostsFromFireBase(final String fireBaseUserId, final NewsFeedFragment newsFeedFragment){
-        Log.e("===>","Inside firebaseHelperclass");
+//        Log.e("===>","Inside firebaseHelperclass");
         final ArrayList<Post> publicPostArrayList = new ArrayList<>();
         db.collection("root").document("public_post")
                 .get()
@@ -174,13 +173,12 @@ public class FireBaseHelperClass {
                 final Map<String, Object> map = documentSnapshot.getData();
                 if(map!=null && map.size()>0) {
                     for (final Map.Entry<String, Object> entry : map.entrySet()) {
-                        Log.e("===>","path is:"+entry.getKey());
+//                        Log.e("===>","path is:"+entry.getKey());
                         db.collection("root").document("users_post/"+entry.getKey())
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        formDataAndShowResult(documentSnapshot);
                                         Map<String, Object> newMap = documentSnapshot.getData();
                                         if(newMap!=null && newMap.size()>0){
                                             Post post = new Post((String)newMap.get("name"),
@@ -193,17 +191,17 @@ public class FireBaseHelperClass {
                                                     (String)newMap.get("path"));
                                             Map<String, Object> postReactorsMap = (Map<String, Object>) newMap.get("postReactors");
                                             if(postReactorsMap!=null && postReactorsMap.containsKey(fireBaseUserId)){
-                                                Log.e("===>","not able to retrieve data of:");
+//                                                Log.e("===>","not able to retrieve data of:");
                                                 post.setCurrentUserReactionToThisPost(((Long)postReactorsMap.get(fireBaseUserId)).intValue());
                                             }
                                             publicPostArrayList.add(post);
 
-                                            Log.e("===>","map:"+map.size()+" post:"+publicPostArrayList.size());
+//                                            Log.e("===>","map:"+map.size()+" post:"+publicPostArrayList.size());
                                             if(map.size()==publicPostArrayList.size())
                                                 newsFeedFragment.updatePostArrayList(publicPostArrayList);
                                         }else{
 //                                            Toast.makeText(newsFeedFragment.getContext(), "Nothing to show", Toast.LENGTH_SHORT).show();
-                                            Log.e("===>","not able to retrieve data of:"+entry.getKey());
+//                                            Log.e("===>","not able to retrieve data of:"+entry.getKey());
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -231,10 +229,6 @@ public class FireBaseHelperClass {
         });
     }
 
-    private void formDataAndShowResult(DocumentSnapshot documentSnapshot) {
-
-    }
-
     public List<Post> getUsersPostFromFireBase(){
         return null;
     }
@@ -250,12 +244,12 @@ public class FireBaseHelperClass {
         db.collection("root").document("users_post/"+postPath).set(newHM, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.e("====>","Yes");
+//                Log.e("====>","Yes");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e("====>",":( failed to add like");
+//                Log.e("====>",":( failed to add like");
             }
         });
     }

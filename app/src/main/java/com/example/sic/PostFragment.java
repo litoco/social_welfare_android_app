@@ -165,14 +165,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccess(AuthResult authResult) {
 //                Log.e("====>","sending file to be uploaded");
-                if(fileUriArrayList.size()>0) {
-                    fireBaseHelperClass
-                            .addFilesToFireBase(fileUriArrayList, fileNameArrayList,
-                                    null, getContext(), PostFragment.this);
-                }else{
-                    fireBaseHelperClass
-                            .addPostToFireBase(new ArrayList<Uri>(), null, PostFragment.this.getContext());
-                }
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -180,6 +173,14 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 //                Log.e("====>","Login failed");
             }
         });
+        if(fileUriArrayList.size()>0) {
+            fireBaseHelperClass
+                    .addFilesToFireBase(fileUriArrayList, fileNameArrayList,
+                            FirebaseAuth.getInstance().getCurrentUser(), getContext(), PostFragment.this);
+        }else{
+            fireBaseHelperClass
+                    .addPostToFireBase(new ArrayList<Uri>(), FirebaseAuth.getInstance().getCurrentUser(), PostFragment.this.getContext());
+        }
     }
 
     public void showConfirmationMessage(){

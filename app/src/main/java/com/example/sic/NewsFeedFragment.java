@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +24,7 @@ public class NewsFeedFragment extends Fragment {
     private ArrayList<Post> al = new ArrayList<>();
     private NewsFeedRecyclerViewAdapter rv;
     private FireBaseHelperClass fireBaseHelperClass;
-    private String fireBaseUserId="test_user_id";
+    private String fireBaseUserId;
 
     public NewsFeedFragment() {
         // Required empty public constructor
@@ -35,7 +37,8 @@ public class NewsFeedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_newsfeed, container, false);
         recyclerView = v.findViewById(R.id.news_feed_recycler_view);
         fireBaseHelperClass = FireBaseHelperClass.getInstance();
-        getDataFromFireBase("test_user_id");
+        fireBaseUserId = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        getDataFromFireBase(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         rv = new NewsFeedRecyclerViewAdapter(this, al);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(rv);

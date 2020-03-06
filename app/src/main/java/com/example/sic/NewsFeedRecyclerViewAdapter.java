@@ -1,6 +1,5 @@
 package com.example.sic;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,23 +114,23 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<NewsFeedRe
                             R.drawable.ic_love);
                 count=1;
             }
-
-            Log.e("===>","count: "+count);
-            Log.e("===>","1 heart count: "+reactionCounts[2]);
-            Log.e("===>","2 heart count: "+reactionCounts[1]);
-            Log.e("===>","3 heart count: "+reactionCounts[0]);
+//
+//            Log.e("===>","count: "+count);
+//            Log.e("===>","1 heart count: "+reactionCounts[2]);
+//            Log.e("===>","2 heart count: "+reactionCounts[1]);
+//            Log.e("===>","3 heart count: "+reactionCounts[0]);
             if(prevLike>=0 && prevLike!=count){
                 if(prevLike>0) {
                     reactionCounts[3 - prevLike] -= 1;
-                    Log.e("===>","prev heart count: "+reactionCounts[3-prevLike]);
+//                    Log.e("===>","prev heart count: "+reactionCounts[3-prevLike]);
                 }
                 reactionCounts[3-count]+=1;
-                Log.e("===>","curr heart count: "+reactionCounts[3-count]);
+//                Log.e("===>","curr heart count: "+reactionCounts[3-count]);
                 al.get(this.getAdapterPosition()).setCurrentUserReactionToThisPost(count);
             }
-            Log.e("===>","1 heart count: "+reactionCounts[2]);
-            Log.e("===>","2 heart count: "+reactionCounts[1]);
-            Log.e("===>","3 heart count: "+reactionCounts[0]);
+//            Log.e("===>","1 heart count: "+reactionCounts[2]);
+//            Log.e("===>","2 heart count: "+reactionCounts[1]);
+//            Log.e("===>","3 heart count: "+reactionCounts[0]);
             al.get(this.getAdapterPosition()).setNumberOfThreeHeartReactions(reactionCounts[0]);
             al.get(this.getAdapterPosition()).setNumberOfTwoHeartReactions(reactionCounts[1]);
             al.get(this.getAdapterPosition()).setNumberOfOneHeartReactions(reactionCounts[2]);

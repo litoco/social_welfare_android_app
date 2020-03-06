@@ -60,6 +60,7 @@ public class PostFragmentRecyclerViewAdapter extends RecyclerView.Adapter<PostFr
                         .override(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL)
                         .placeholder(R.drawable.ic_broken_image)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .centerCrop()
                         .into(holder.itemImageView);
             }
         } catch (IOException e) {
