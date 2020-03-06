@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "806916318770",
+    "firebase_url": "https://sharing-is-caring-project.firebaseio.com",
+    "project_id": "sharing-is-caring-project",
+    "storage_bucket": "sharing-is-caring-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806916318770:android:516eb6e5214e34e8353e2b",
+        "android_client_info": {
+          "package_name": "com.example.sic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806916318770-4g5frhbofb85lj6bh9su6q0j5fnheuu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_DVpCI8Q6QdLi503IyqDHfy8v2QE81-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806916318770-4g5frhbofb85lj6bh9su6q0j5fnheuu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
